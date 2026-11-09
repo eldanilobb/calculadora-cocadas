@@ -157,13 +157,6 @@
           <span id="soundText" class="hidden sm:inline">Sonido: SÍ</span>
         </button>
 
-        <!-- Botón Narrador de voz -->
-        <button id="btnVoiceToggle" aria-label="Lectura de voz" 
-                class="btn-burbuja flex items-center gap-1.5 px-3 py-2 bg-lila-100 hover:bg-lila-200 text-lila-700 font-bold text-xs sm:text-sm rounded-2xl border-2 border-lila-200 shadow-burbuja-sm">
-          <span>🗣️</span>
-          <span class="hidden sm:inline">Voz</span>
-        </button>
-
         <!-- Contador de estrellitas ganadas -->
         <div class="flex items-center gap-1.5 px-3.5 py-2 bg-amber-50 rounded-2xl border-2 border-amber-200 text-amber-900 font-extrabold text-sm shadow-burbuja-sm">
           <span class="text-amber-500 text-lg animate-pulse-soft">⭐</span>
@@ -258,18 +251,13 @@
     <main id="moduloA" class="space-y-5">
       <!-- Tarjeta Introductoria -->
       <div class="bg-white/95 p-4 sm:p-5 rounded-3xl border-2 border-slate-200 shadow-burbuja">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-          <div>
-            <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2">
-              <span>🍽️</span> ¿Cuántas cocadas tienes en tu mesa?
-            </h3>
-            <p class="text-xs sm:text-sm font-semibold text-slate-500">
-              Cuenta tus cocadas reales de coco y de chispas. ¡Mira cómo se forma el número!
-            </p>
-          </div>
-          <button onclick="readCalculatorExplanation()" class="btn-burbuja self-start sm:self-auto flex items-center gap-1 px-3 py-1.5 bg-vainilla-100 hover:bg-vainilla-200 text-vainilla-800 font-bold text-xs rounded-xl border border-vainilla-300">
-            <span>🔊</span> Escuchar
-          </button>
+        <div class="border-b border-slate-100 pb-3">
+          <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2">
+            <span>🍽️</span> ¿Cuántas cocadas tienes en tu mesa?
+          </h3>
+          <p class="text-xs sm:text-sm font-semibold text-slate-500 mt-0.5">
+            Cuenta tus cocadas reales de coco y de chispas. ¡Mira cómo se forma el número!
+          </p>
         </div>
 
         <!-- Controles de conteo (Decenas y Unidades) -->
@@ -461,16 +449,11 @@
         <div class="mt-4 bg-gradient-to-b from-amber-50/50 to-pink-50/30 p-4 sm:p-6 rounded-3xl border-2 border-amber-200/70">
           
           <!-- Enunciado amigable -->
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-2">
-              <span class="text-2xl" id="quizEmojiPrompt">🧁</span>
-              <p id="quizPromptText" class="text-sm sm:text-base md:text-lg font-extrabold text-slate-800">
-                ¡Cuenta cuántas cocadas horneamos en la bandeja!
-              </p>
-            </div>
-            <button onclick="speakQuizPrompt()" aria-label="Escuchar la pregunta" class="btn-burbuja p-2 bg-white hover:bg-vainilla-100 text-slate-700 rounded-xl border border-slate-200 shadow-sm">
-              🔊
-            </button>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-2xl" id="quizEmojiPrompt">🧁</span>
+            <p id="quizPromptText" class="text-sm sm:text-base md:text-lg font-extrabold text-slate-800">
+              ¡Cuenta cuántas cocadas horneamos en la bandeja!
+            </p>
           </div>
 
           <!-- BANDEJA DE COCADAS PICTÓRICAS -->
@@ -683,11 +666,10 @@
     const IMG_UNIDAD = 'img/cocada-chispas.png';
 
     /* ==========================================================
-       2. GESTIÓN DE SONIDO Y AUDIO CON WEB AUDIO API
+       2. GESTIÓN DE SONIDO Y EFECTOS CON WEB AUDIO API
        Sintetizador dulce nativo sin archivos de audio externos
        ========================================================== */
     let soundEnabled = true;
-    let voiceEnabled = true;
     let audioCtx = null;
 
     function getAudioContext() {
@@ -773,36 +755,12 @@
       } catch (e) {}
     }
 
-    // Lectura de voz en español para educación diferencial
-    function speakText(text) {
-      if (!voiceEnabled || !('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'es-ES';
-      utterance.rate = 0.9; // Hablar un poco más lento para mejor comprensión
-      utterance.pitch = 1.1; // Tono ligeramente dulce y amigable
-      window.speechSynthesis.speak(utterance);
-    }
-
     // Toggle de sonido
     document.getElementById('btnSoundToggle').addEventListener('click', () => {
       soundEnabled = !soundEnabled;
       document.getElementById('soundIcon').textContent = soundEnabled ? '🔔' : '🔕';
       document.getElementById('soundText').textContent = soundEnabled ? 'Sonido: SÍ' : 'Sonido: NO';
       if (soundEnabled) playPopSound(500);
-    });
-
-    // Toggle de voz
-    document.getElementById('btnVoiceToggle').addEventListener('click', () => {
-      voiceEnabled = !voiceEnabled;
-      const btn = document.getElementById('btnVoiceToggle');
-      if (voiceEnabled) {
-        btn.classList.add('bg-lila-200');
-        speakText('Voz activada');
-      } else {
-        btn.classList.remove('bg-lila-200');
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-      }
     });
 
     /* ==========================================================
@@ -1081,15 +1039,6 @@
       updateCalculator();
     }
 
-    function readCalculatorExplanation() {
-      const decValue = decenasCount * 10;
-      const total = decValue + unidadesCount;
-      const decText = decenasCount === 1 ? '1 cocada de coco que vale 10' : `${decenasCount} cocadas de coco que valen ${decValue}`;
-      const uniText = unidadesCount === 1 ? '1 cocada con chispas que vale 1' : `${unidadesCount} cocadas con chispas que valen ${unidadesCount}`;
-      const msg = `Tienes ${decText}, y ${uniText}. En total tienes ${total} cocadas. ¡Muy bien!`;
-      speakText(msg);
-    }
-
     /* ==========================================================
        8. MÓDULO B: MINI QUIZ PICTÓRICO (MÁXIMO 30)
        ========================================================== */
@@ -1127,8 +1076,7 @@
           target: target,
           d: d,
           u: u,
-          prompt: `¿Cuántas cocadas horneamos en total en esta bandeja?`,
-          speakPrompt: `¿Cuántas cocadas horneamos en total en esta bandeja? Recuerda que cada bola de coco vale 10.`
+          prompt: `¿Cuántas cocadas horneamos en total en esta bandeja?`
         };
         renderCountQuiz(d, u);
       } else if (quizMode === 'sum') {
@@ -1151,8 +1099,7 @@
           d2: d2,
           u2: u2,
           target: total,
-          prompt: `En la mañana horneamos ${num1} cocadas y en la tarde ${num2} más. ¿Cuántas hay en total?`,
-          speakPrompt: `En la mañana horneamos ${num1} cocadas y en la tarde ${num2} más. ¿Cuántas cocadas hay en total?`
+          prompt: `En la mañana horneamos ${num1} cocadas y en la tarde ${num2} más. ¿Cuántas hay en total?`
         };
         renderSumQuiz(d1, u1, d2, u2);
       } else if (quizMode === 'sub') {
@@ -1172,8 +1119,7 @@
           d: dTotal,
           u: uTotal,
           target: target,
-          prompt: `Teníamos ${total} cocadas ricas y nos comimos ${uMinus}. ¿Cuántas cocadas nos quedan?`,
-          speakPrompt: `Teníamos ${total} cocadas ricas y nos comimos ${uMinus}. ¿Cuántas cocadas nos quedan?`
+          prompt: `Teníamos ${total} cocadas ricas y nos comimos ${uMinus}. ¿Cuántas cocadas nos quedan?`
         };
         renderSubQuiz(dTotal, uTotal, uMinus);
       }
@@ -1278,10 +1224,6 @@
       platter.appendChild(container);
     }
 
-    function speakQuizPrompt() {
-      if (currentQuiz) speakText(currentQuiz.speakPrompt);
-    }
-
     // Teclado virtual amigable
     function pressKey(num) {
       playPopSound(500);
@@ -1341,7 +1283,6 @@
         `;
         feedbackBox.classList.remove('hidden');
         document.getElementById('btnCheckAnswer').classList.add('hidden');
-        speakText(`¡Genial! ¡Lo lograste! El resultado es ${currentQuiz.target}.`);
       } else {
         // RESPUESTA INCORRECTA: Cero frustración, refuerzo positivo cálido
         playEncouragingTone();
@@ -1364,7 +1305,6 @@
           </div>
         `;
         feedbackBox.classList.remove('hidden');
-        speakText('¡Estuviste muy cerca! Vamos a contarlas juntas de nuevo. Recuerda que cada bola de coco vale 10.');
       }
     }
 
@@ -1452,7 +1392,6 @@
         // Añadir 1 de coco
         boxItems.push({ id: nextItemId++, type: 'decena' });
         renderMagicBox();
-        speakText('¡Magia! Has canjeado 10 cocadas con chispas por 1 cocada grande de coco. ¡Vale exactamente lo mismo!');
       }
     }
 

@@ -21,10 +21,9 @@ A través del enfoque **CPA (Concreto - Pictórico - Abstracto)**, los estudiant
    - En caso de acierto: fiesta de confeti, arpegio de campanas y acumulación de estrellas.
    - En caso de error: acompañamiento cálido (*"¡Estuviste muy cerca! Vamos a contarlas juntas"*) y botón de pista guiada paso a paso.
 
-3. **Soporte Auditivo & Lectura en Voz Alta**:
-   - Sintetizador de voz en español (`SpeechSynthesis`) para enunciados, desgloses y preguntas.
+3. **Soporte Auditivo Lúdico**:
    - Sonidos dulces sintetizados con `Web Audio API` (sin archivos pesados ni dependencias externas).
-   - Interruptores rápidos para silenciar sonido o voz si existe sensibilidad auditiva.
+   - Interruptor rápido para silenciar sonido si existe sensibilidad auditiva.
 
 ---
 
