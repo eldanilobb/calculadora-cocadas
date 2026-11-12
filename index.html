@@ -712,7 +712,7 @@
        4. GENERADOR DE ELEMENTOS VISUALES COCADAS
        Con soporte 'onerror' elegante para garantizar que nunca se rompa
        ========================================================== */
-    function createCocadaHTML(type, sizeClass = 'w-12 h-12', extraClass = '', customOnClick = '') {
+    function createCocadaHTML(type, sizeClass = 'w-12 h-12', extraClass = '', customOnClick = '', showLabel = true) {
       const isDecena = (type === 'decena');
       const src = isDecena ? IMG_DECENA : IMG_UNIDAD;
       const alt = isDecena ? 'Cocada de Coco (Decena 10)' : 'Cocada con Chispas (Unidad 1)';
@@ -725,9 +725,9 @@
         return `
           <div class="relative inline-flex items-center justify-center select-none group transition-all duration-200 ${extraClass}" 
                ${customOnClick ? `onclick="${customOnClick}"` : ''}>
-            <div class="${sizeClass} ${fallbackBg} border-2 rounded-2xl items-center justify-center font-black text-center drop-shadow-md flex flex-col text-[11px] leading-tight transition-transform duration-150 group-hover:scale-105 active:scale-95">
-              <span class="text-base">${emoji}</span>
-              <span class="font-extrabold -mt-0.5">${label}</span>
+            <div class="${sizeClass} ${fallbackBg} border rounded-xl items-center justify-center font-black text-center drop-shadow-sm flex flex-col text-[10px] leading-tight transition-transform duration-150 group-hover:scale-105 active:scale-95 overflow-hidden">
+              <span class="${showLabel ? 'text-base' : 'text-xs sm:text-sm leading-none'}">${emoji}</span>
+              ${showLabel ? `<span class="font-extrabold -mt-0.5">${label}</span>` : ''}
             </div>
           </div>
         `;
@@ -737,11 +737,11 @@
         <div class="relative inline-flex items-center justify-center select-none group transition-all duration-200 ${extraClass}" 
              ${customOnClick ? `onclick="${customOnClick}"` : ''}>
           <img src="${src}" alt="${alt}" 
-               class="${sizeClass} object-contain rounded-2xl drop-shadow-md transition-transform duration-150 group-hover:scale-105 active:scale-95" 
+               class="${sizeClass} object-contain rounded-xl drop-shadow-sm transition-transform duration-150 group-hover:scale-105 active:scale-95" 
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hidden ${sizeClass} ${fallbackBg} border-2 rounded-2xl items-center justify-center font-black text-center drop-shadow-md flex-col text-[11px] leading-tight transition-transform duration-150 group-hover:scale-105 active:scale-95">
-            <span class="text-base">${emoji}</span>
-            <span class="font-extrabold -mt-0.5">${label}</span>
+          <div class="hidden ${sizeClass} ${fallbackBg} border rounded-xl items-center justify-center font-black text-center drop-shadow-sm flex-col text-[10px] leading-tight transition-transform duration-150 group-hover:scale-105 active:scale-95 overflow-hidden">
+            <span class="${showLabel ? 'text-base' : 'text-xs sm:text-sm leading-none'}">${emoji}</span>
+            ${showLabel ? `<span class="font-extrabold -mt-0.5">${label}</span>` : ''}
           </div>
         </div>
       `;
@@ -1297,43 +1297,86 @@
       const container = document.getElementById('mentalExercisesList');
       if (!container) return;
 
-      container.innerHTML = MENTAL_MATH_EXERCISES.map((ex, idx) => `
+      container.innerHTML = MENTAL_MATH_EXERCISES.map((ex, idx) => {
+        const countD = Math.floor(ex.dNum / 10);
+        const cocadasDecenaHTML = Array.from({ length: countD })
+          .map(() => createCocadaHTML('decena', 'w-6 h-6 sm:w-7 sm:h-7', '', '', false))
+          .join('');
+
+        const countU = ex.uNum;
+        const cocadasUnidadHTML = Array.from({ length: countU })
+          .map(() => createCocadaHTML('unidad', 'w-5 h-5 sm:w-6 sm:h-6', '', '', false))
+          .join('');
+
+        return `
         <div id="mentalRow_${idx}" class="p-3.5 sm:p-4 rounded-3xl bg-white border-2 border-slate-200 shadow-sm transition-all duration-300 ${idx === 0 ? '' : 'hidden'}">
           <div class="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
             
             <!-- Operación y Casillas alineadas -->
-            <div class="flex items-end gap-2 sm:gap-3 flex-wrap">
+            <div class="flex items-end gap-1.5 sm:gap-2.5 flex-nowrap">
               
-              <!-- Operación limpia: [10] + [3] = -->
-              <div class="flex items-center gap-2 sm:gap-3 h-12 sm:h-14">
-                <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
-                  ${ex.dNum}
-                </span>
-                <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">
-                  +
-                </span>
-                <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
-                  ${ex.uNum}
-                </span>
-                <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">
-                  =
-                </span>
+              <!-- Columna 1: Decena -->
+              <div class="flex flex-col items-center">
+                <div class="min-h-[36px] sm:min-h-[44px] flex flex-wrap items-center justify-center gap-1 max-w-[80px] sm:max-w-[100px] mb-1">
+                  ${cocadasDecenaHTML}
+                </div>
+                <div class="h-12 sm:h-14 flex items-center justify-center min-w-[48px] sm:min-w-[56px]">
+                  <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
+                    ${ex.dNum}
+                  </span>
+                </div>
               </div>
 
-              <!-- Casilla D -->
+              <!-- Columna 2: Signo + -->
               <div class="flex flex-col items-center">
-                <span class="text-[11px] sm:text-xs font-black uppercase text-orange-600 bg-orange-100 px-2.5 py-0.5 rounded-lg border border-orange-300 mb-1 select-none">
-                  D
-                </span>
+                <div class="min-h-[36px] sm:min-h-[44px] flex items-center justify-center mb-1">
+                  <span class="invisible select-none pointer-events-none">·</span>
+                </div>
+                <div class="h-12 sm:h-14 flex items-center justify-center px-0.5 sm:px-1">
+                  <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">+</span>
+                </div>
+              </div>
+
+              <!-- Columna 3: Unidad -->
+              <div class="flex flex-col items-center">
+                <div class="min-h-[36px] sm:min-h-[44px] flex flex-wrap items-center justify-center gap-1 max-w-[96px] sm:max-w-[130px] mb-1">
+                  ${cocadasUnidadHTML}
+                </div>
+                <div class="h-12 sm:h-14 flex items-center justify-center min-w-[36px] sm:min-w-[48px]">
+                  <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
+                    ${ex.uNum}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Columna 4: Signo = -->
+              <div class="flex flex-col items-center">
+                <div class="min-h-[36px] sm:min-h-[44px] flex items-center justify-center mb-1">
+                  <span class="invisible select-none pointer-events-none">·</span>
+                </div>
+                <div class="h-12 sm:h-14 flex items-center justify-center px-0.5 sm:px-1">
+                  <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">=</span>
+                </div>
+              </div>
+
+              <!-- Columna 5: Casilla D -->
+              <div class="flex flex-col items-center">
+                <div class="min-h-[36px] sm:min-h-[44px] flex items-center justify-center mb-1">
+                  <span class="text-xs sm:text-sm font-black uppercase text-orange-600 bg-orange-100 px-2.5 py-0.5 sm:py-1 rounded-xl border border-orange-300 select-none shadow-sm">
+                    D
+                  </span>
+                </div>
                 <input id="mentalInputD_${idx}" type="text" maxlength="1" inputmode="numeric" placeholder="·" autocomplete="off"
                        class="w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-orange-600 bg-orange-50/60 rounded-2xl border-2 border-orange-300 focus:border-orange-500 focus:bg-white focus:outline-none shadow-inner transition-colors" />
               </div>
 
-              <!-- Casilla U -->
+              <!-- Columna 6: Casilla U -->
               <div class="flex flex-col items-center">
-                <span class="text-[11px] sm:text-xs font-black uppercase text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-lg border border-emerald-300 mb-1 select-none">
-                  U
-                </span>
+                <div class="min-h-[36px] sm:min-h-[44px] flex items-center justify-center mb-1">
+                  <span class="text-xs sm:text-sm font-black uppercase text-emerald-700 bg-emerald-100 px-2.5 py-0.5 sm:py-1 rounded-xl border border-emerald-300 select-none shadow-sm">
+                    U
+                  </span>
+                </div>
                 <input id="mentalInputU_${idx}" type="text" maxlength="1" inputmode="numeric" placeholder="·" autocomplete="off"
                        class="w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-emerald-700 bg-emerald-50/60 rounded-2xl border-2 border-emerald-300 focus:border-emerald-500 focus:bg-white focus:outline-none shadow-inner transition-colors" />
               </div>
@@ -1358,7 +1401,8 @@
           <div id="mentalHint_${idx}" class="hidden mt-3 p-3 bg-vainilla-100 border-2 border-vainilla-300 rounded-2xl text-xs sm:text-sm text-amber-900 font-bold animate-pop">
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       MENTAL_MATH_EXERCISES.forEach((_, idx) => {
         setupMentalInputs(idx);
