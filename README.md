@@ -46,11 +46,11 @@ A través del enfoque **CPA (Concreto - Pictórico - Abstracto)**, los estudiant
 - Teclado numérico táctil en pantalla optimizado para tablets.
 - Pistas paso a paso que agrupan de 10 en 10 y luego de 1 en 1.
 
-### 3. 📦 Caja Mágica de Cocadas (Zona Libre Manipulativa)
-- Tapete interactivo donde la niña puede experimentar libremente sin calificaciones.
-- Dispensadores superiores para agregar `+ Cocada de Coco (+10)` y `+ Cocada con Chispas (+1)`.
-- Cada dulce se puede tocar en el tapete para devolverlo o comérselo.
-- **🪄 ¡Canje Mágico!**: cuando acumula 10 o más chispitas, se activa un botón para transformarlas en 1 cocada de coco, interiorizando el canje posicional.
+### 3. 🧠 Cálculo Mental (Paso Abstracto - Prueba Final)
+- Etapa abstracta del modelo CPA, sin estímulos pictóricos de cocadas.
+- Serie progresiva de 9 ejercicios estructurados para sumar decenas y unidades (`10 + 3`, `20 + 5`, `30 + 1`, etc.).
+- Identificación directa del valor posicional en casillas etiquetadas de **Decena (D)** y **Unidad (U)** con avance de foco automático.
+- Flujo guiado de uno en uno con bloqueo tras acierto, pistas pedagógicas de refuerzo positivo sin frustración y fiesta de confeti al completar la serie.
 
 ---
 

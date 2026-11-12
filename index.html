@@ -237,11 +237,11 @@
         <span class="text-center leading-tight">2. Mini Reto</span>
       </button>
 
-      <!-- Pestaña 3: Caja de Pruebas -->
+      <!-- Pestaña 3: Cálculo Mental -->
       <button id="tabBtnC" onclick="switchTab('C')" role="tab" aria-selected="false"
               class="btn-burbuja py-3 sm:py-3.5 px-2 rounded-2xl font-extrabold text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 bg-white text-slate-600 hover:bg-lila-50 border-2 border-slate-200 shadow-burbuja">
-        <span class="text-xl sm:text-2xl">📦</span>
-        <span class="text-center leading-tight">3. Caja Mágica</span>
+        <span class="text-xl sm:text-2xl">🧠</span>
+        <span class="text-center leading-tight">3. Cálculo Mental</span>
       </button>
     </nav>
 
@@ -521,127 +521,52 @@
     </section>
 
     <!-- ======================================================== -->
-    <!-- MÓDULO C: CAJA DE PRUEBAS (ZONA LIBRE MANIPULATIVA)      -->
+    <!-- MÓDULO C: CÁLCULO MENTAL (ETAPA ABSTRACTA / PRUEBA FINAL) -->
     <!-- ======================================================== -->
     <section id="moduloC" class="hidden space-y-4">
-      <div class="bg-white/95 p-4 sm:p-5 rounded-3xl border-2 border-slate-200 shadow-burbuja">
+      <div class="bg-white/95 p-4 sm:p-6 rounded-3xl border-2 border-slate-200 shadow-burbuja">
         
-        <!-- Cabecera de la Caja -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+        <!-- Cabecera de Cálculo Mental -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
           <div>
-            <h3 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2">
-              <span>📦</span> Caja Mágica de Cocadas (Zona Libre)
-            </h3>
-            <p class="text-xs sm:text-sm font-semibold text-slate-500">
-              Toca los dispensadores para meter cocadas a tu caja. ¡Toca una cocada para devolverla!
+            <div class="flex items-center gap-2">
+              <span class="text-2xl sm:text-3xl">🧠</span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
+                Cálculo mental
+              </h3>
+            </div>
+            <p class="text-sm sm:text-base font-bold text-slate-600 mt-1">
+              Suma decenas y unidades:
             </p>
           </div>
 
-          <!-- Botones de Acción Especial: Canje Mágico y Vaciar -->
-          <div class="flex items-center gap-2 self-start sm:self-auto flex-wrap">
-            <button id="btnMagicExchange" onclick="exchangeTenUnits()" 
-                    class="btn-burbuja hidden px-3.5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-extrabold text-xs sm:text-sm rounded-2xl border-2 border-purple-600 shadow-burbuja animate-pulse-soft">
-              ✨ ¡Canjear 10 chispas por 1 coco!
-            </button>
-            <button onclick="clearMagicBox()" 
-                    class="btn-burbuja px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-2xl border border-slate-300 shadow-sm">
-              🧹 Vaciar la caja
-            </button>
-          </div>
-        </div>
-
-        <!-- DISPENSADORES SUPERIORES GRANDES -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-4">
-          <!-- Dispensador Decena (+10) -->
-          <button onclick="addBoxItem('decena')" 
-                  class="btn-burbuja flex items-center justify-between p-3.5 sm:p-4 rounded-3xl bg-gradient-to-r from-orange-100 to-orange-50 border-3 border-decena-chip shadow-burbuja active:scale-95 text-left">
-            <div class="flex items-center gap-3">
-              <div class="w-14 h-14 p-1 bg-white rounded-2xl border-2 border-orange-200 flex items-center justify-center">
-                <img src="img/cocada-coco.png" alt="Cocada Coco" class="w-full h-full object-contain" 
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                <div class="hidden w-full h-full bg-orange-100 rounded-xl items-center justify-center text-xs font-black">🥥 10</div>
-              </div>
-              <div>
-                <span class="block font-black text-slate-800 text-base sm:text-lg">+ Cocada de Coco</span>
-                <span class="text-xs font-bold text-decena-badge">Añade 1 DECENA (+10)</span>
-              </div>
-            </div>
-            <span class="text-2xl sm:text-3xl font-black text-orange-600 bg-white w-10 h-10 rounded-2xl flex items-center justify-center border-2 border-orange-300 shadow-sm">+</span>
-          </button>
-
-          <!-- Dispensador Unidad (+1) -->
-          <button onclick="addBoxItem('unidad')" 
-                  class="btn-burbuja flex items-center justify-between p-3.5 sm:p-4 rounded-3xl bg-gradient-to-r from-pink-100 to-pink-50 border-3 border-unidad-chip shadow-burbuja active:scale-95 text-left">
-            <div class="flex items-center gap-3">
-              <div class="w-14 h-14 p-1 bg-white rounded-2xl border-2 border-pink-200 flex items-center justify-center">
-                <img src="img/cocada-chispas.png" alt="Cocada Chispas" class="w-full h-full object-contain" 
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                <div class="hidden w-full h-full bg-pink-100 rounded-xl items-center justify-center text-xs font-black">🧁 1</div>
-              </div>
-              <div>
-                <span class="block font-black text-slate-800 text-base sm:text-lg">+ Cocada con Chispas</span>
-                <span class="text-xs font-bold text-unidad-badge">Añade 1 UNIDAD (+1)</span>
-              </div>
-            </div>
-            <span class="text-2xl sm:text-3xl font-black text-pink-600 bg-white w-10 h-10 rounded-2xl flex items-center justify-center border-2 border-pink-300 shadow-sm">+</span>
-          </button>
-        </div>
-
-        <!-- TAPETE / ÁREA DE JUEGO DONDE CAEN LAS COCADAS -->
-        <div class="mt-4">
-          <div class="flex items-center justify-between px-2 mb-1">
-            <span class="text-xs font-black text-slate-400 uppercase tracking-wider">
-              Tapete de Dulces (Toca una cocada para quitarla):
-            </span>
-            <span id="boxEmptyNotice" class="text-xs font-bold text-slate-400">
-              Caja vacía. ¡Toca los botones de arriba!
+          <!-- Indicador de progreso -->
+          <div class="flex items-center gap-2 bg-slate-100 px-3.5 py-1.5 rounded-2xl border border-slate-200 self-start sm:self-auto">
+            <span class="text-xs font-black text-slate-500 uppercase">Progreso:</span>
+            <span id="mentalProgressText" class="text-xs sm:text-sm font-extrabold text-purple-700 bg-white px-2.5 py-0.5 rounded-xl border border-purple-200 shadow-sm">
+              1 de 9
             </span>
           </div>
-
-          <div id="magicBoxPlayground" 
-               class="min-h-[220px] sm:min-h-[260px] bg-gradient-to-b from-amber-50/40 via-white to-pink-50/30 rounded-3xl p-4 sm:p-6 border-3 border-dashed border-amber-300 shadow-inner flex flex-wrap content-start items-center justify-center gap-3 relative overflow-hidden transition-all">
-            <!-- Aquí aparecen las cocadas agregadas interactivamente -->
-          </div>
         </div>
 
-        <!-- MARCADOR EN VIVO DE LA CAJA (MINI TABLA D / U Y TOTAL) -->
-        <div class="mt-5 p-4 bg-slate-50 rounded-3xl border-2 border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
-          
-          <!-- Mini Columna D -->
-          <div class="flex items-center gap-3 bg-white p-3 rounded-2xl border-2 border-decena-border shadow-sm">
-            <div class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center font-black text-orange-700 text-lg">
-              D
-            </div>
-            <div>
-              <span class="text-[11px] font-bold text-slate-400 uppercase block">Decenas (x10)</span>
-              <span id="boxDecenasCount" class="text-2xl font-black text-decena-badge">0</span>
-              <span id="boxDecenasVal" class="text-xs font-bold text-slate-500">(= 0)</span>
-            </div>
-          </div>
+        <!-- LISTA DE EJERCICIOS (FLUJO PROGRESIVO) -->
+        <div id="mentalExercisesList" class="space-y-3 sm:space-y-4 mt-5">
+          <!-- Renderizado dinámicamente con JavaScript -->
+        </div>
 
-          <!-- Mini Columna U -->
-          <div class="flex items-center gap-3 bg-white p-3 rounded-2xl border-2 border-unidad-border shadow-sm">
-            <div class="w-10 h-10 rounded-xl bg-pink-100 flex items-center justify-center font-black text-pink-700 text-lg">
-              U
-            </div>
-            <div>
-              <span class="text-[11px] font-bold text-slate-400 uppercase block">Unidades (x1)</span>
-              <span id="boxUnidadesCount" class="text-2xl font-black text-unidad-badge">0</span>
-              <span id="boxUnidadesVal" class="text-xs font-bold text-slate-500">(= 0)</span>
-            </div>
-          </div>
-
-          <!-- Total en Vivo -->
-          <div class="flex items-center justify-between bg-gradient-to-r from-menta-100 to-menta-200 p-3 rounded-2xl border-2 border-menta-400 shadow-sm">
-            <div>
-              <span class="text-[11px] font-black text-emerald-800 uppercase block">Total Acumulado</span>
-              <span id="boxTotalWord" class="text-xs font-extrabold text-emerald-700">Cero cocadas</span>
-            </div>
-            <div id="boxTotalCount" class="text-3xl sm:text-4xl font-black text-emerald-900">
-              0
-            </div>
-          </div>
-
+        <!-- TARJETA DE FELICITACIÓN FINAL (OCULTA POR DEFECTO) -->
+        <div id="mentalCompletionBox" class="hidden mt-6 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-menta-100 via-vainilla-100 to-pink-100 border-3 border-menta-400 text-center animate-pop shadow-md">
+          <div class="text-4xl mb-2 animate-bounce">🏆🎉✨⭐</div>
+          <h4 class="text-xl sm:text-2xl font-black text-emerald-900 mb-1">
+            ¡Felicitaciones! ¡Completaste todo el Cálculo Mental!
+          </h4>
+          <p class="text-sm sm:text-base font-bold text-slate-700 mb-4 max-w-md mx-auto">
+            ¡Sumaste todas las decenas y unidades súper rápido! Eres una campeona matemática. 🌟
+          </p>
+          <button onclick="restartMentalMath()" 
+                  class="btn-burbuja px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base rounded-2xl border-2 border-emerald-700 shadow-burbuja">
+            🔄 ¡Practicar de nuevo!
+          </button>
         </div>
 
       </div>
@@ -954,6 +879,9 @@
 
       if (tabId === 'B' && !currentQuiz) {
         generateNewQuiz();
+      }
+      if (tabId === 'C') {
+        focusActiveMentalInput();
       }
     }
 
@@ -1351,94 +1279,259 @@
     });
 
     /* ==========================================================
-       9. MÓDULO C: CAJA DE PRUEBAS (ZONA LIBRE MANIPULATIVA)
+       9. MÓDULO C: CÁLCULO MENTAL (ETAPA ABSTRACTA / PRUEBA FINAL)
        ========================================================== */
-    let boxItems = []; // { id, type: 'decena' | 'unidad' }
-    let nextItemId = 1;
+    const MENTAL_MATH_EXERCISES = [
+      { dNum: 10, uNum: 3, targetD: '1', targetU: '3' },
+      { dNum: 20, uNum: 5, targetD: '2', targetU: '5' },
+      { dNum: 30, uNum: 1, targetD: '3', targetU: '1' },
+      { dNum: 10, uNum: 8, targetD: '1', targetU: '8' },
+      { dNum: 20, uNum: 7, targetD: '2', targetU: '7' },
+      { dNum: 30, uNum: 5, targetD: '3', targetU: '5' },
+      { dNum: 10, uNum: 4, targetD: '1', targetU: '4' },
+      { dNum: 20, uNum: 2, targetD: '2', targetU: '2' },
+      { dNum: 30, uNum: 6, targetD: '3', targetU: '6' }
+    ];
 
-    function addBoxItem(type) {
-      playPopSound(type === 'decena' ? 440 : 580);
-      const item = {
-        id: nextItemId++,
-        type: type
-      };
-      boxItems.push(item);
-      renderMagicBox();
+    function initMentalMath() {
+      const container = document.getElementById('mentalExercisesList');
+      if (!container) return;
+
+      container.innerHTML = MENTAL_MATH_EXERCISES.map((ex, idx) => `
+        <div id="mentalRow_${idx}" class="p-3.5 sm:p-4 rounded-3xl bg-white border-2 border-slate-200 shadow-sm transition-all duration-300 ${idx === 0 ? '' : 'hidden'}">
+          <div class="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+            
+            <!-- Operación y Casillas alineadas -->
+            <div class="flex items-end gap-2 sm:gap-3 flex-wrap">
+              
+              <!-- Operación limpia: [10] + [3] = -->
+              <div class="flex items-center gap-2 sm:gap-3 h-12 sm:h-14">
+                <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
+                  ${ex.dNum}
+                </span>
+                <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">
+                  +
+                </span>
+                <span class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 select-none tracking-tight">
+                  ${ex.uNum}
+                </span>
+                <span class="text-xl sm:text-2xl font-black text-slate-400 select-none">
+                  =
+                </span>
+              </div>
+
+              <!-- Casilla D -->
+              <div class="flex flex-col items-center">
+                <span class="text-[11px] sm:text-xs font-black uppercase text-orange-600 bg-orange-100 px-2.5 py-0.5 rounded-lg border border-orange-300 mb-1 select-none">
+                  D
+                </span>
+                <input id="mentalInputD_${idx}" type="text" maxlength="1" inputmode="numeric" placeholder="·" autocomplete="off"
+                       class="w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-orange-600 bg-orange-50/60 rounded-2xl border-2 border-orange-300 focus:border-orange-500 focus:bg-white focus:outline-none shadow-inner transition-colors" />
+              </div>
+
+              <!-- Casilla U -->
+              <div class="flex flex-col items-center">
+                <span class="text-[11px] sm:text-xs font-black uppercase text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-lg border border-emerald-300 mb-1 select-none">
+                  U
+                </span>
+                <input id="mentalInputU_${idx}" type="text" maxlength="1" inputmode="numeric" placeholder="·" autocomplete="off"
+                       class="w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-emerald-700 bg-emerald-50/60 rounded-2xl border-2 border-emerald-300 focus:border-emerald-500 focus:bg-white focus:outline-none shadow-inner transition-colors" />
+              </div>
+
+            </div>
+
+            <!-- Acciones / Estado -->
+            <div class="flex items-center gap-2 ml-auto sm:ml-0 pt-3 sm:pt-0">
+              <button id="mentalCheckBtn_${idx}" onclick="checkMentalRow(${idx})"
+                      class="btn-burbuja py-2.5 px-4 sm:px-5 bg-menta-400 hover:bg-menta-600 text-slate-900 hover:text-white font-black text-xs sm:text-sm rounded-2xl border-2 border-menta-600 shadow-burbuja active:translate-y-0.5 whitespace-nowrap">
+                ✨ Comprobar
+              </button>
+              <div id="mentalSuccess_${idx}" class="hidden text-emerald-700 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 whitespace-nowrap bg-emerald-100/90 px-3 py-2 rounded-2xl border border-emerald-300 shadow-sm animate-pop">
+                <span class="text-base">✅</span>
+                <span>¡Correcto!</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pista pedagógica si hay error -->
+          <div id="mentalHint_${idx}" class="hidden mt-3 p-3 bg-vainilla-100 border-2 border-vainilla-300 rounded-2xl text-xs sm:text-sm text-amber-900 font-bold animate-pop">
+          </div>
+        </div>
+      `).join('');
+
+      MENTAL_MATH_EXERCISES.forEach((_, idx) => {
+        setupMentalInputs(idx);
+      });
     }
 
-    function removeBoxItem(id) {
-      playPopSound(300);
-      boxItems = boxItems.filter(item => item.id !== id);
-      renderMagicBox();
+    function setupMentalInputs(index) {
+      const inputD = document.getElementById(`mentalInputD_${index}`);
+      const inputU = document.getElementById(`mentalInputU_${index}`);
+      if (!inputD || !inputU) return;
+
+      inputD.addEventListener('input', () => {
+        inputD.value = inputD.value.replace(/\D/g, '');
+        if (inputD.value.length >= 1) {
+          inputD.value = inputD.value.slice(-1);
+          inputU.focus();
+        }
+      });
+
+      inputD.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          checkMentalRow(index);
+        }
+      });
+
+      inputU.addEventListener('input', () => {
+        inputU.value = inputU.value.replace(/\D/g, '');
+        if (inputU.value.length >= 1) {
+          inputU.value = inputU.value.slice(-1);
+        }
+      });
+
+      inputU.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && inputU.value === '') {
+          inputD.focus();
+        } else if (e.key === 'Enter') {
+          checkMentalRow(index);
+        }
+      });
     }
 
-    function clearMagicBox() {
-      playPopSound(250);
-      boxItems = [];
-      renderMagicBox();
-    }
+    function checkMentalRow(index) {
+      const ex = MENTAL_MATH_EXERCISES[index];
+      const inputD = document.getElementById(`mentalInputD_${index}`);
+      const inputU = document.getElementById(`mentalInputU_${index}`);
+      const hintBox = document.getElementById(`mentalHint_${index}`);
 
-    // Canje pedagógico: 10 unidades por 1 decena
-    function exchangeTenUnits() {
-      const units = boxItems.filter(it => it.type === 'unidad');
-      if (units.length >= 10) {
+      if (!inputD || !inputU) return;
+
+      const valD = inputD.value.trim();
+      const valU = inputU.value.trim();
+
+      if (!valD || !valU) {
+        playEncouragingTone();
+        if (hintBox) {
+          hintBox.classList.remove('hidden');
+          hintBox.innerHTML = '✏️ ¡Completa ambas casillas (D y U) para comprobar tu respuesta!';
+        }
+        if (!valD) inputD.focus();
+        else inputU.focus();
+        return;
+      }
+
+      if (valD === ex.targetD && valU === ex.targetU) {
         playSuccessChime();
-        launchConfettiCelebration();
+        earnedStars++;
+        document.getElementById('starCounter').textContent = earnedStars;
 
-        // Eliminar las primeras 10 unidades
-        const unitIdsToRemove = units.slice(0, 10).map(u => u.id);
-        boxItems = boxItems.filter(it => !unitIdsToRemove.includes(it.id));
+        if (hintBox) hintBox.classList.add('hidden');
 
-        // Añadir 1 de coco
-        boxItems.push({ id: nextItemId++, type: 'decena' });
-        renderMagicBox();
+        inputD.readOnly = true;
+        inputU.readOnly = true;
+        inputD.classList.remove('focus:border-orange-500', 'focus:bg-white');
+        inputU.classList.remove('focus:border-emerald-500', 'focus:bg-white');
+        inputD.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-800', 'cursor-default');
+        inputU.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-800', 'cursor-default');
+
+        const row = document.getElementById(`mentalRow_${index}`);
+        if (row) {
+          row.classList.remove('border-slate-200');
+          row.classList.add('border-emerald-300', 'bg-emerald-50/30');
+        }
+
+        const btnCheck = document.getElementById(`mentalCheckBtn_${index}`);
+        const successBadge = document.getElementById(`mentalSuccess_${index}`);
+        if (btnCheck) btnCheck.classList.add('hidden');
+        if (successBadge) successBadge.classList.remove('hidden');
+
+        if (index === MENTAL_MATH_EXERCISES.length - 1) {
+          launchConfettiCelebration();
+          document.getElementById('mentalProgressText').textContent = '9 de 9 ✨';
+          const completionBox = document.getElementById('mentalCompletionBox');
+          if (completionBox) {
+            completionBox.classList.remove('hidden');
+            completionBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        } else {
+          const nextIndex = index + 1;
+          document.getElementById('mentalProgressText').textContent = `${nextIndex + 1} de 9`;
+          const nextRow = document.getElementById(`mentalRow_${nextIndex}`);
+          if (nextRow) {
+            nextRow.classList.remove('hidden');
+            nextRow.classList.add('animate-pop');
+            const nextInputD = document.getElementById(`mentalInputD_${nextIndex}`);
+            if (nextInputD) nextInputD.focus();
+            nextRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      } else {
+        playEncouragingTone();
+        if (hintBox) {
+          hintBox.classList.remove('hidden');
+          hintBox.innerHTML = '💛 ¡Casi! Revisa tu suma e inténtalo de nuevo.';
+        }
+        inputD.value = '';
+        inputU.value = '';
+        inputD.focus();
       }
     }
 
-    function renderMagicBox() {
-      const playground = document.getElementById('magicBoxPlayground');
-      const emptyNotice = document.getElementById('boxEmptyNotice');
-      playground.innerHTML = '';
-
-      if (boxItems.length === 0) {
-        emptyNotice.classList.remove('hidden');
-      } else {
-        emptyNotice.classList.add('hidden');
-        boxItems.forEach(item => {
-          const isDecena = (item.type === 'decena');
-          const size = isDecena ? 'w-14 h-14 sm:w-16 sm:h-16' : 'w-10 h-10 sm:w-12 sm:h-12';
-          const el = document.createElement('div');
-          el.className = 'cursor-pointer transform hover:scale-110 active:scale-90 transition-transform duration-150 animate-pop relative group';
-          el.title = isDecena ? 'Cocada de Coco (10). Toca para quitar' : 'Cocada con Chispas (1). Toca para quitar';
-          
-          el.innerHTML = `
-            ${createCocadaHTML(item.type, size)}
-            <span class="absolute -top-1 -right-1 bg-rose-500 text-white rounded-full w-4 h-4 text-[10px] font-black items-center justify-center opacity-0 group-hover:opacity-100 flex transition-opacity shadow-sm">✕</span>
-          `;
-          el.addEventListener('click', () => removeBoxItem(item.id));
-          playground.appendChild(el);
-        });
+    function focusActiveMentalInput() {
+      for (let i = 0; i < MENTAL_MATH_EXERCISES.length; i++) {
+        const row = document.getElementById(`mentalRow_${i}`);
+        if (row && !row.classList.contains('hidden')) {
+          const inputD = document.getElementById(`mentalInputD_${i}`);
+          const inputU = document.getElementById(`mentalInputU_${i}`);
+          if (inputD && !inputD.readOnly) {
+            if (!inputD.value) inputD.focus();
+            else if (!inputU.value) inputU.focus();
+            else inputD.focus();
+            break;
+          }
+        }
       }
+    }
 
-      // Cálculos del marcador en vivo
-      const decenas = boxItems.filter(it => it.type === 'decena').length;
-      const unidades = boxItems.filter(it => it.type === 'unidad').length;
-      const total = decenas * 10 + unidades;
+    function restartMentalMath() {
+      playPopSound(440);
+      const completionBox = document.getElementById('mentalCompletionBox');
+      if (completionBox) completionBox.classList.add('hidden');
+      document.getElementById('mentalProgressText').textContent = '1 de 9';
 
-      document.getElementById('boxDecenasCount').textContent = decenas;
-      document.getElementById('boxDecenasVal').textContent = `(= ${decenas * 10})`;
-      document.getElementById('boxUnidadesCount').textContent = unidades;
-      document.getElementById('boxUnidadesVal').textContent = `(= ${unidades})`;
-      document.getElementById('boxTotalCount').textContent = total;
-      document.getElementById('boxTotalWord').textContent = `${numberToWords(total)} ${total === 1 ? 'cocada' : 'cocadas'}`;
+      MENTAL_MATH_EXERCISES.forEach((_, idx) => {
+        const row = document.getElementById(`mentalRow_${idx}`);
+        const inputD = document.getElementById(`mentalInputD_${idx}`);
+        const inputU = document.getElementById(`mentalInputU_${idx}`);
+        const btnCheck = document.getElementById(`mentalCheckBtn_${idx}`);
+        const successBadge = document.getElementById(`mentalSuccess_${idx}`);
+        const hintBox = document.getElementById(`mentalHint_${idx}`);
 
-      // Mostrar u ocultar botón de Canje Mágico si hay >= 10 chispas
-      const btnExchange = document.getElementById('btnMagicExchange');
-      if (unidades >= 10) {
-        btnExchange.classList.remove('hidden');
-      } else {
-        btnExchange.classList.add('hidden');
-      }
+        if (row) {
+          row.className = `p-3.5 sm:p-4 rounded-3xl bg-white border-2 border-slate-200 shadow-sm transition-all duration-300 ${idx === 0 ? '' : 'hidden'}`;
+        }
+
+        if (inputD && inputU) {
+          inputD.value = '';
+          inputU.value = '';
+          inputD.readOnly = false;
+          inputU.readOnly = false;
+          inputD.className = 'w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-orange-600 bg-orange-50/60 rounded-2xl border-2 border-orange-300 focus:border-orange-500 focus:bg-white focus:outline-none shadow-inner transition-colors';
+          inputU.className = 'w-11 h-12 sm:w-14 sm:h-14 text-center text-2xl sm:text-3xl font-black text-emerald-700 bg-emerald-50/60 rounded-2xl border-2 border-emerald-300 focus:border-emerald-500 focus:bg-white focus:outline-none shadow-inner transition-colors';
+        }
+
+        if (btnCheck) btnCheck.classList.remove('hidden');
+        if (successBadge) successBadge.classList.add('hidden');
+        if (hintBox) {
+          hintBox.classList.add('hidden');
+          hintBox.innerHTML = '';
+        }
+      });
+
+      const firstInputD = document.getElementById('mentalInputD_0');
+      if (firstInputD) firstInputD.focus();
     }
 
     /* ==========================================================
@@ -1466,7 +1559,7 @@
       }
 
       updateCalculator();
-      renderMagicBox();
+      initMentalMath();
     });
   </script>
 </body>
